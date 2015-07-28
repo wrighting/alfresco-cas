@@ -421,6 +421,7 @@
             <name>Alfresco Connector</name>
             <description>Connects to an Alfresco instance using cookie-based authentication</description>
             <class>org.alfresco.web.site.servlet.SlingshotAlfrescoConnector</class>
+            <userHeader>X-Alfresco-Remote-User</userHeader>
          </connector>
 
          <connector>
