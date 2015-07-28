@@ -41,8 +41,8 @@
         
         <cas.client.version>3.2.1</cas.client.version>
         <!-- CAS settings for web.xml -->
-	<alfresco.server.name>https://localhost:8443</alfresco.server.name>
-	<share.server.name>https://localhost:8444</share.server.name>
+	<alfresco.server.name>http://localhost:8080</alfresco.server.name>
+	<share.server.name>http://localhost:8080</share.server.name>
 	<cas.server.prefix>https://wrighting.org/sso</cas.server.prefix>
     </properties>
 
