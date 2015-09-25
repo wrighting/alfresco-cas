@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.alfresco.web.site.servlet;
+package org.wrighting.web.site.servlet;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -24,6 +24,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.alfresco.web.site.servlet.SSOAuthenticationFilter;
 import org.springframework.extensions.config.RemoteConfigElement.ConnectorDescriptor;
 import org.springframework.extensions.webscripts.RequestCachingConnector;
 import org.springframework.extensions.webscripts.connector.AlfrescoConnector;
