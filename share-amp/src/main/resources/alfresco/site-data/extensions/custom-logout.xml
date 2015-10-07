@@ -1,0 +1,15 @@
+<extension>
+  <modules>
+    <module>
+      <id>Customize logout for SSO</id>
+      <version>1.0</version>
+      <auto-deploy>true</auto-deploy>
+      <customizations>
+        <customization>
+          <targetPackageRoot>org.alfresco.share.header</targetPackageRoot>
+          <sourcePackageRoot>org.wrighting.alfresco.usermenu</sourcePackageRoot>
+        </customization>
+      </customizations>
+    </module>
+  </modules>
+</extension>
