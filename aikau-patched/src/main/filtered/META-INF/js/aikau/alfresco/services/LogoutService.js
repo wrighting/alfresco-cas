@@ -40,6 +40,7 @@ define(["dojo/_base/declare",
             	redirectURLQueryKey: "service",
             	redirectURLQueryValue: "${cas.logout.dest.url}"	
             },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             successCallback: this.reloadPage,
             callbackScope: this
          });
