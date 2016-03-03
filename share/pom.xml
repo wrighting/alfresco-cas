@@ -34,17 +34,9 @@
 			<version>${project.version}</version>
 			<type>amp</type>
 		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>aikau-patched</artifactId>
-			<version>${project.version}</version>
-			<type>jar</type>
-		</dependency>
-		
 		<!-- Uncomment if you are using RM (Records Management) module -->
 		<!-- <dependency> <groupId>${alfresco.groupId}</groupId> <artifactId>alfresco-rm-share</artifactId> 
 			<version>${alfresco.rm.version}</version> <type>amp</type> </dependency> -->
-
 		<dependency>
 			<groupId>org.jasig.cas.client</groupId>
 			<artifactId>cas-client-core</artifactId>
@@ -63,6 +55,7 @@
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -83,10 +76,8 @@
 							<groupId>${alfresco.groupId}</groupId>
 							<artifactId>${alfresco.share.artifactId}</artifactId>
 							<type>war</type>
-							<excludes>
-								<exclude>WEB-INF/lib/aikau-${aikau.version}.jar</exclude>
-							</excludes>
-
+							<!-- To allow inclusion of META-INF -->
+							<excludes />
 						</overlay>
 						<!-- Add / sort your AMPs here -->
 						<overlay>
@@ -98,6 +89,18 @@
 						<!-- <overlay> <groupId>${alfresco.groupId}</groupId> <artifactId>alfresco-rm-share</artifactId> 
 							<type>amp</type> </overlay> -->
 					</overlays>
+					<encoding>UTF-8</encoding>
+					<webResources>
+						<resource>
+							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>**/web.xml</include>
+							</includes>
+						</resource>
+					</webResources>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+                                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
 		</plugins>

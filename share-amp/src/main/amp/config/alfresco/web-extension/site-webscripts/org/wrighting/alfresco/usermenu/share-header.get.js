@@ -1,3 +1,4 @@
+
 var userMenuWidgets = 
   widgetUtils.findObject(model.jsonModel, "id", "HEADER_USER_MENU");
 if (userMenuWidgets != null)
@@ -16,6 +17,15 @@ if (userMenuWidgets != null)
         }
      });
 
+}
+
+//Replace the alfresco LogoutService with our version
+//services can be a string or an object
+var myservices = model.jsonModel.services;
+for(var i = 0, len = myservices.length; i < len; i++) {
+    if (typeof myservices[i] === "string" && myservices[i] == "alfresco/services/LogoutService") {
+    	model.jsonModel.services[i] = "Authentication/LogoutService";
+    }
 }
 
 widgetUtils.deleteObjectFromArray(model.jsonModel, "id", "HEADER_USER_MENU_PASSWORD"); 

@@ -4,6 +4,17 @@
       <id>Customize logout for SSO</id>
       <version>1.0</version>
       <auto-deploy>true</auto-deploy>
+      <configurations>
+        <config evaluator="string-compare" condition="WebFramework" replace="false">
+          <web-framework>
+            <dojo-pages> 
+                <packages> 
+                    <package name="Authentication" location="js/Authentication"/>
+                </packages>
+            </dojo-pages>
+          </web-framework>
+        </config>
+      </configurations>
       <customizations>
         <customization>
           <targetPackageRoot>org.alfresco.share.header</targetPackageRoot>
