@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.wrighting</groupId>
 	<artifactId>cas</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Alfresco Repository and Share Quickstart with database and an embedded Tomcat runner.</name>
 	<description>This All-in-One project allows to manage all the components involved in Alfresco development (Repo, Share, Solr4, AMPs) in one project
     </description>
@@ -68,7 +67,8 @@
 		<connection>scm:git:git@github.com:wrighting/alfresco-cas.git</connection>
 		<url>scm:git:git@github.com:wrighting/alfresco-cas.git</url>
 		<developerConnection>scm:git:git@github.com:wrighting/alfresco-cas.git</developerConnection>
-	</scm>
+	  <tag>cas-1.0</tag>
+  </scm>
 
 	<build>
 		<plugins>
