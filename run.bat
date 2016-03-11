@@ -1,15 +1,8 @@
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::      Dev environment startup script for Alfresco Community     ::
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-@echo off
+@ECHO OFF
 
-set springloadedfile=%HOME%\.m2\repository\org\springframework\springloaded\1.2.3.RELEASE\springloaded-1.2.3.RELEASE.jar
-
-if not exist %springloadedfile% (
-  mvn validate -Psetup
+IF "%MAVEN_OPTS%" == "" (
+    ECHO The environment variable 'MAVEN_OPTS' is not set, setting it for you
+    SET MAVEN_OPTS=-Xms256m -Xmx2G -XX:PermSize=300m
 )
-
-set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify -Xms256m -Xmx2G
-
-mvn clean install -Prun -nsu
-:: mvn install -Prun 
+ECHO MAVEN_OPTS is set to '%MAVEN_OPTS%'
+mvn clean install -Prun

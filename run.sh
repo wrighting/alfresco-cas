@@ -1,9 +1,7 @@
 #!/bin/bash
-# Downloads the spring-loaded lib if not existing and runs the full all-in-one
-# (Alfresco + Share + Solr) using the runner project
-springloadedfile=~/.m2/repository/org/springframework/springloaded/1.2.3.RELEASE/springloaded-1.2.3.RELEASE.jar
-
-if [ ! -f $springloadedfile ]; then
-mvn validate -Psetup
+if [[ -z ${MAVEN_OPTS} ]]; then
+    echo "The environment variable 'MAVEN_OPTS' is not set, setting it for you";
+    MAVEN_OPTS="-Xms256m -Xmx1524m -XX:PermSize=300m"
 fi
-MAVEN_OPTS="-javaagent:$springloadedfile -noverify -Xms256m -Xmx2G" mvn clean install -Prun
+echo "MAVEN_OPTS is set to '$MAVEN_OPTS'";
+mvn clean install -Prun

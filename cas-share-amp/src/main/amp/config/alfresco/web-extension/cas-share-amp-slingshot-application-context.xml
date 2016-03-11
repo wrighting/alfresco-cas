@@ -18,7 +18,7 @@
          class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
       <property name="resourceBundles">
          <list>
-            <value>alfresco.web-extension.messages.share-amp</value>
+            <value>alfresco.web-extension.messages.cas-share-amp</value>
          </list>
       </property>
    </bean>
