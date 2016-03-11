@@ -17,8 +17,5 @@
 	limitations under the License.
 -->
 <beans>
-	<bean id="webscript.helloworld.get"
-		  class="org.wrighting.cas.demoamp.HelloWorldWebScript"
-		  parent="webscript">
-	</bean>
+    
 </beans>

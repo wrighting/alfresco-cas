@@ -9,11 +9,11 @@
 
 
     <!-- Registration of new models -->
-    <bean id="org.wrighting.cas.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
+    <bean id="cas-repo-amp.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
         <property name="models">
             <list>
-                <value>alfresco/module/${project.artifactId}/model/content-model.xml</value>
-                <value>alfresco/module/${project.artifactId}/model/workflow-model.xml</value>
+                <value>alfresco/module/cas-repo-amp/model/content-model.xml</value>
+                <value>alfresco/module/cas-repo-amp/model/workflow-model.xml</value>
 
             </list>
         </property>
