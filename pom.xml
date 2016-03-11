@@ -43,7 +43,7 @@
 		<!-- CAS settings for web.xml -->
 		<alfresco.server.name>http://localhost:8080</alfresco.server.name>
 		<share.server.name>http://localhost:8080</share.server.name>
-		<cas.server.prefix>https://wrighting.org/sso</cas.server.prefix>
+		<cas.server.prefix>https://tech.wrighting.org/sso</cas.server.prefix>
 		<cas.logout.dest.url>http://wrighting.org</cas.logout.dest.url>
 
 	</properties>
