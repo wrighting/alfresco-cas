@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="share-amp-1.0-SNAPSHOT.amp" deploy-path="/WEB-INF/lib" handle="module:/resource/share-amp/share-amp">
+        <dependent-module archiveName="share-amp-1.1-SNAPSHOT.amp" deploy-path="/WEB-INF/lib" handle="module:/resource/share-amp/share-amp">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module deploy-path="/" handle="module:/overlay/prj/share-amp?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
