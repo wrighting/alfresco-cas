@@ -21,9 +21,10 @@
            For more available properties see the alfresco-sdk-parent POM.
            -->
 	<properties>
+                  <alfresco.version>5.1.f</alfresco.version> 
+                  <dependency.surf.version>1.6</dependency.surf.version>
 		<!-- The following are default values for data location, Alfresco Community version, and Records Management Module version.
                      Uncomment if you need to change (Note. current default version for Enterprise edition is 5.1)
-                  <alfresco.version>5.1.e</alfresco.version> 
 		  <alfresco.rm.version>2.3</alfresco.rm.version>
                   <alfresco.data.location>/absolute/path/to/alf_data_dev</alfresco.data.location> -->
 

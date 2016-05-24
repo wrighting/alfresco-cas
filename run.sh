@@ -4,4 +4,4 @@ if [[ -z ${MAVEN_OPTS} ]]; then
     MAVEN_OPTS="-Xms256m -Xmx1524m -XX:PermSize=300m"
 fi
 echo "MAVEN_OPTS is set to '$MAVEN_OPTS'";
-mvn clean install -Prun
+mvn clean install -Ddependency.surf.version=6.3 -Prun
