@@ -123,18 +123,6 @@
                         -->
 
 					</overlays>
-					<encoding>UTF-8</encoding>
-					<webResources>
-						<resource>
-							<directory>src/main/webapp</directory>
-							<filtering>true</filtering>
-							<includes>
-								<include>**/web.xml</include>
-							</includes>
-						</resource>
-					</webResources>
-					<warSourceDirectory>src/main/webapp</warSourceDirectory>
-                                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
 		</plugins>
