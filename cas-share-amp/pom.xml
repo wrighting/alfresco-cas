@@ -24,6 +24,10 @@
 
 		<!-- Defines the log level used in log4j.properties -->
 		<app.log.root.level>WARN</app.log.root.level>
+		
+		<!-- See https://github.com/apereo/java-cas-client -->
+		<cas.client.config.strategy>PROPERTY_FILE</cas.client.config.strategy>
+		<cas.client.config.file>/etc/java-cas-client.properties</cas.client.config.file>
 	</properties>
 
 	<!-- Following dependencies are needed for compiling Java code in src/main/java; 
