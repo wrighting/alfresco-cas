@@ -345,6 +345,53 @@
                     <alwaysGenerate>true</alwaysGenerate>
                 </configuration>
             </plugin>
+
+            <!-- 
+mvn jgitflow:release-start
+mvn jgitflow:release-finish
+-->
+            <plugin>
+              <groupId>com.atlassian.maven.plugins</groupId>
+              <artifactId>maven-jgitflow-plugin</artifactId>
+              <version>1.0-alpha20</version>
+              <configuration>
+                <!-- Enable this to push to origin using SSH keys -->
+                <enableSshAgent>true</enableSshAgent>
+                <!-- Keep your maven submodules at the same version as the parent POM -->
+                <autoVersionSubmodules>true</autoVersionSubmodules>
+                <!--
+                  Pusing in-development features to origin allows all devs to see what each other
+                  are working on
+                -->
+                <pushFeatures>true</pushFeatures>
+                <!--
+                  This allows the CI server (e.g. Jenkins) to automatically push new releases to
+                  origin; you can then either manually deploy them or, if you are doing Continuous
+                  Deployments, auto-deploy them to prod
+                -->
+                <pushReleases>true</pushReleases>
+                <!--
+                  Hot Fixes should be pushed to origin as well so that any dev can pick them up
+                -->
+                <pushHotfixes>true</pushHotfixes>
+                <!--
+                  Prevents deployments from dev workstations so that they can be done by a CI
+                  server
+                -->
+                <noDeploy>true</noDeploy>
+                <flowInitContext>
+                  <!--
+                    You can customize your development branch name. Why? Because it's faster to type
+                    'git push origin dvlp'
+                    than
+                    'git push origin develop'
+                    ;-)
+                  -->
+                  <developBranchName>dvlp</developBranchName>
+                </flowInitContext>
+              </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -429,4 +476,11 @@
     <module>alfresco-cas-platform-amp</module>
     <module>alfresco-cas-share-amp</module>
   </modules>
+
+  <scm>
+    <connection>scm:git:git@github.com:wrighting/alfresco-cas.git</connection>
+    <url>scm:git:git@github.com:wrighting/alfresco-cas.git</url>
+    <developerConnection>scm:git:git@github.com:wrighting/alfresco-cas.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
 </project>
