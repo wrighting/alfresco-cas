@@ -11,9 +11,9 @@ define(["dojo/_base/declare",
             url: AlfConstants.URL_PAGECONTEXT + "dologout",
             method: "POST",
             data: {
-                redirectURL: this.message("redirectURL"),
+                redirectURL: this.casLogout,
                 redirectURLQueryKey: this.message("redirectURLQueryKey"),
-                redirectURLQueryValue: this.message("redirectURLQueryValue") 
+                redirectURLQueryValue: this.logoutDestination 
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             successCallback: this.reloadPage,

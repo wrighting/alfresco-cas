@@ -9,7 +9,7 @@
           <web-framework>
             <dojo-pages> 
                 <packages> 
-                    <package name="Authentication" location="js/Authentication"/>
+                    <package name="Authentication" location="alfresco-cas-share-amp/js/Authentication"/>
                 </packages>
             </dojo-pages>
           </web-framework>

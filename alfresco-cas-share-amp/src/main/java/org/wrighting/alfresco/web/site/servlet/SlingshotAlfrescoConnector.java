@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.wrighting.web.site.servlet;
+package org.wrighting.alfresco.web.site.servlet;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
