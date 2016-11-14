@@ -48,12 +48,9 @@ This can be done by setting the connector.package property in the pom.xml to *wr
 
 The default build uses a web-fragment.xml to enable the CAS filters, because these will be applied after the Alfresco filters there is an additional filter (DeepLinkingFilter) to make sure that deep linking works (deep linking is going directly to a page other than the user homepage on logging in).
 
-There is also a [web.xml file](src/main/assembly/web/WEB-INF/web.xml.5.1.g) that can be used *instead of* the web-fragment.xml. This allows the filters to be invoked before the Alfresco filters.
-
 ## Upgrade notes
 
-For new versions you need to check that there are no additional end points to configure in 
-web-fragment.xml
+For new versions you need to check that there are no additional end points to configure in web-fragment.xml
    
   
  

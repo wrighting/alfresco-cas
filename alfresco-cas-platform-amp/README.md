@@ -3,7 +3,7 @@ Note that Share will work with CAS without this AMP.
 The AMP provides CAS authentication against the repository where appropriate.
 
 Examples include
-  * [The workflow console](http://localhost:8080/alfresco/s/admin/admin-workflowconsole)
+  * [The admin console](http://localhost:8080/alfresco/s/admin/)
   
 ## CAS configuration
 
