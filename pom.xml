@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wrighting</groupId>
     <artifactId>alfresco-cas</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2.1</version>
     <name>Alfresco CAS Integration</name>
     <description>Configure Alfresco to use CAS SSO</description>
     <packaging>pom</packaging>
@@ -24,7 +24,7 @@
         <!-- share-global.properties casServiceParamName -->
         <cas.service.param>service</cas.service.param>
         <!-- share-global.properties passwordLink -->
-        <change.password.url/>
+        <change.password.url />
 
         <!-- Set a name so you can configure Share when you've logged in -->
         <external.authentication.defaultAdministratorUserNames>admin</external.authentication.defaultAdministratorUserNames>
