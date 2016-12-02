@@ -4,7 +4,7 @@
     <parent>
         <artifactId>alfresco-cas</artifactId>
         <groupId>org.wrighting</groupId>
-        <version>1.2-SNAPSHOT</version>
+        <version>1.2.2</version>
     </parent>
     <artifactId>alfresco-cas-platform-amp</artifactId>
     <name>Alfresco CAS Platform/Repository AMP Module</name>
@@ -180,7 +180,7 @@
                     <classpath>
                         <fallback>all</fallback>
                         <resources>
-                            <resource></resource>
+                            <resource />
                         </resources>
                     </classpath>
 
