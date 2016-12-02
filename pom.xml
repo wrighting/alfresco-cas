@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wrighting</groupId>
     <artifactId>alfresco-cas</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2-SNAPSHOT</version>
     <name>Alfresco CAS Integration</name>
     <description>Configure Alfresco to use CAS SSO</description>
     <packaging>pom</packaging>
