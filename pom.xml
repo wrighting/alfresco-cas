@@ -278,14 +278,12 @@
                         </moduleDependency>
 
                         <!-- Bring in custom Modules -->
-                        <!--
                         <moduleDependency>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>alfresco-cas-platform-amp</artifactId>
                             <version>${project.version}</version>
                             <type>amp</type>
                         </moduleDependency>
-                        -->
                         <moduleDependency>
                             <groupId>${alfresco.groupId}.surf</groupId>
                             <artifactId>spring-webscripts</artifactId>
