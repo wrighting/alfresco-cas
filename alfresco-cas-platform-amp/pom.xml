@@ -24,9 +24,8 @@
         	<version>${alfresco.platform.version}</version>
         </dependency>
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-servlet-api</artifactId>
-			<version>7.0.72</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
     </dependencies>
