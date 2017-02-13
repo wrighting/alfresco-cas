@@ -18,6 +18,15 @@
             <userHeader>X-Alfresco-Remote-User</userHeader>
          </connector>
 
+		  <endpoint>
+			 <id>alfresco-noauth</id>
+			 <name>Alfresco - unauthenticated access</name>
+			 <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+			 <connector-id>alfresco</connector-id>
+			 <endpoint-url>${noauth.endpoint}</endpoint-url>
+			 <identity>none</identity>
+		  </endpoint>
+
          <endpoint>
             <id>alfresco</id>
             <name>Alfresco - user access</name>
