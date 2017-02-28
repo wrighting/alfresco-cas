@@ -49,6 +49,20 @@ public class AuthenticatedEvaluator extends BaseSSOAuthenticationFilter implemen
 		if (request.getAttribute(IgnoreFlagFilter.IGNORE_ATTRIBUTE) != null) {
 			return false;
 		}
+
+		Enumeration<String> headers = req.getHeaderNames();
+		while (headers.hasMoreElements()) {
+			String headerName = headers.nextElement();
+			String value = req.getHeader(headerName);
+			if (logger.isDebugEnabled()) {
+				logger.debug("Request header:" + headerName + "=" + value);
+			}
+			//e.g. if basic auth is being requested e.g. by mobile apps
+			if (headerName.equalsIgnoreCase("authorization")) {
+				return false;
+			}
+		}
+		
 		// Check if the user is already authenticated
 		SessionUser user = getSessionUser(context, req, resp, true);
 

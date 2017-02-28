@@ -9,17 +9,18 @@
     <parent>
         <groupId>org.wrighting</groupId>
         <artifactId>alfresco-cas</artifactId>
-        <version>1.2.2</version>
+        <version>1.2.3</version>
     </parent>
 
     <properties>
-   <!-- Settings for share-config-custom.xml -->
+        <!-- Settings for share-config-custom.xml -->
+        <noauth.endpoint>http://localhost:8080/alfresco/s</noauth.endpoint>
         <useraccess.endpoint>http://localhost:8080/alfresco/wcs</useraccess.endpoint>
         <feed.endpoint>http://localhost:8080/alfresco/wcs</feed.endpoint>
         <api.endpoint>http://localhost:8080/alfresco/api</api.endpoint>
         <!-- for 5.0.c to 5.1.f inclusive
-             <connector.package>wrighting.alfresco</connector.package> 
-             -->
+             <connector.package>wrighting.alfresco</connector.package>
+        -->
         <connector.package>alfresco</connector.package>
 
     </properties>
@@ -38,6 +39,13 @@
             <groupId>org.alfresco.surf</groupId>
             <artifactId>spring-surf-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -46,7 +54,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.6</version>
                 <executions>
                     <execution>
                         <id>build-amp-file</id>
@@ -92,7 +99,7 @@
         <profile>
             <id>local</id>
             <build>
-               <resources>
+                <resources>
                     <!-- Filter the resource files in this project and do property substitutions -->
                     <resource>
                         <directory>src/main/resources</directory>

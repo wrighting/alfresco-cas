@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wrighting</groupId>
     <artifactId>alfresco-cas</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <name>Alfresco CAS Integration</name>
     <description>Configure Alfresco to use CAS SSO</description>
     <packaging>pom</packaging>
@@ -11,10 +11,10 @@
     <properties>
         <java.cas.client.config.strategy>PROPERTY_FILE</java.cas.client.config.strategy>
         <java.cas.client.config.location>/etc/java-cas-client.properties</java.cas.client.config.location>
- 		<!-- You need to set the following for CAS auth in /etc/java-cas-client.properties 
+		<!-- You need to set the following for CAS auth in /etc/java-cas-client.properties
             casServerLoginUrl=https://tech.wrighting.org/sso/login
             serverName=http://localhost:8080 
- 			ticketValidatorClass=org.jasig.cas.client.validation.Cas30ServiceTicketValidator 
+			ticketValidatorClass=org.jasig.cas.client.validation.Cas30ServiceTicketValidator
             casServerUrlPrefix=https://tech.wrighting.org/sso
             -->
         <!-- share-global.properties casServerLogoutUrl -->
@@ -62,11 +62,11 @@
         <alfresco.share.version>5.1.g</alfresco.share.version>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
-        <alfresco.surf.version>6.5</alfresco.surf.version>
+        <alfresco.surf.version>6.11</alfresco.surf.version>
 
         <!-- Aikau framework version, it is released separately, so it can be useful to be able
              to bring in newer versions with bug fixes etc -->
-        <aikau.version>1.0.67</aikau.version>
+        <aikau.version>1.0.101.3</aikau.version>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
@@ -133,6 +133,14 @@
                 <version>${alfresco.surf.version}</version>
                 <scope>provided</scope>
             </dependency>
+
+		   <dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -391,7 +399,6 @@ mvn jgitflow:release-finish
                 </flowInitContext>
               </configuration>
             </plugin>
-
         </plugins>
     </build>
 
@@ -470,6 +477,25 @@ mvn jgitflow:release-finish
 				</plugins>
 			</build>
 		</profile>
+        <profile>
+            <id>owasp</id>
+            <build>
+                <plugins>
+                    <plugin> <!-- checks owsp vulnerability database during verify phase -->
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>1.4.3</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 	</profiles>
 	
   <modules>
