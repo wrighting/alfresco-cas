@@ -32,7 +32,7 @@
         <module.log.level>warn</module.log.level>
 
         <!-- Alfresco Maven Plugin version to use -->
-        <alfresco.sdk.version>3.0.0-beta-5</alfresco.sdk.version>
+        <alfresco.sdk.version>3.0.1</alfresco.sdk.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -42,7 +42,7 @@
               Search index (i.e. the indexed content and metadata)
              Configured in alfresco-global.properties with the 'dir.root' property.
               -->
-        <alfresco.data.location>${session.executionRootDirectory}/alf_data_dev</alfresco.data.location>
+        <alfresco.data.location>./alf_data_dev</alfresco.data.location>
 
         <!-- Duplicated with alfresco.solrHome in the plugin, we need them out here to do filtering -->
         <solr.home>${alfresco.data.location}/solr</solr.home>
@@ -51,23 +51,26 @@
 
         <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
-        <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
-        <!-- Platform WAR artifact, change to 'alfresco-enterprise' if using Enterprise Edition -->
-        <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
 
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.e</alfresco.platform.version>
-        <alfresco.share.version>5.2.d</alfresco.share.version>
+        <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
+        <!--
+        This doesn't work unfortunately
+        see : https://github.com/Alfresco/alfresco-sdk/blob/master/plugins/alfresco-maven-plugin/src/main/java/org/alfresco/maven/plugin/AbstractRunMojo.java#L1620
+        The getter implementation always overrides this setting configured in https://github.com/Alfresco/alfresco-sdk/blob/master/plugins/alfresco-maven-plugin/src/main/java/org/alfresco/maven/plugin/AbstractRunMojo.java#L308
+        As a workaround download the war from Alfresco public repos and use this command to install it locally under a different alias :
+        mvn install:install-file -DgroupId=org.alfresco -DartifactId=alfresco-platform -Dversion=6.0.5-ea -Dpackaging=war -Dfile=/path/to/content-services-community-6.0.5-ea.war
+        -->
+        <alfresco.platform.war.artifactId>content-services-community</alfresco.platform.war.artifactId>
+        <alfresco.share.version>6.0.c</alfresco.share.version>
+
+        <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
+        <maven.alfresco.edition>community</maven.alfresco.edition>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
         <alfresco.surf.version>6.11</alfresco.surf.version>
-        <webscripts.version>6.13</webscripts.version>
-
-        <!-- Aikau framework version, it is released separately, so it can be useful to be able
-             to bring in newer versions with bug fixes etc -->
-        <aikau.version>1.0.101.3</aikau.version>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
@@ -81,6 +84,57 @@
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
 
+    <!-- Libs used in Unit and Integration tests -->
+    <!-- IMPORTANT - Test dependencies need to be here in the top parent POM as
+                     the Alfresco Maven IT Mojo runs as part of the parent project ... -->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- The main Alfresco Repo dependency for compiling Java code in src/main/java -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-repository</artifactId>
+            <version>6.37</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.alfresco</groupId>
+            <artifactId>alfresco-remote-api</artifactId>
+            <version>6.23</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1212</version>
+        </dependency>
+
+        <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
+        <dependency>
+            <groupId>org.alfresco.maven</groupId>
+            <artifactId>alfresco-rad</artifactId>
+            <version>${alfresco.sdk.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco platform.
@@ -89,6 +143,7 @@
                  NOTE: It defaults to the latest version this SDK pom has been tested with,
                        but alfresco version can/should be overridden in your project's pom
             -->
+            <!--
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
                 <artifactId>alfresco-platform-distribution</artifactId>
@@ -96,18 +151,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            -->
             <!-- Redefine the following Share dependencies as they have different version numbers than platform.
                  They are defined in alfresco-platform-distribution... -->
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>${alfresco.share.war.artifactId}</artifactId>
+                <artifactId>share</artifactId>
                 <version>${alfresco.share.version}</version>
                 <type>war</type>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>${alfresco.share.war.artifactId}</artifactId>
+                <artifactId>share</artifactId>
                 <version>${alfresco.share.version}</version>
                 <classifier>classes</classifier>
                 <scope>provided</scope>
@@ -134,21 +190,25 @@
                 <version>${alfresco.surf.version}</version>
                 <scope>provided</scope>
             </dependency>
-
-		   <dependency>
+		    <dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>3.0.1</version>
 				<scope>provided</scope>
-			</dependency>
-
+		 	</dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Build an AMP if 3rd party libs are needed by the extensions -->
+                <!--
+                    Build an AMP if 3rd party libs are needed by the extensions
+                    JARs are the default artifact produced in your modules, if you want to build an amp for each module
+                    you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
+                    the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
+                    module.
+                -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -221,6 +281,7 @@
             </resource>
         </resources>
 
+
         <plugins>
             <!-- Filter the test resource files in the AIO parent project, and do property substitutions.
                  We need this config so this is done before the Alfresco Maven Plugin 'run' is executed. -->
@@ -259,25 +320,23 @@
                 <artifactId>alfresco-maven-plugin</artifactId>
                 <version>${alfresco.sdk.version}</version>
                 <configuration>
-                    <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
-                    <alfrescoEdition>community</alfrescoEdition>
 
-                    <!-- We need the flat file H2 database to run the Repo -->
-                    <enableH2>true</enableH2>
+                    <enablePostgreSQL>true</enablePostgreSQL>
                     <!-- We always need the Platform/Repo webapp - alfresco.war -->
                     <enablePlatform>true</enablePlatform>
                     <!-- Enable Solr webapp so we can use search -->
-                    <enableSolr>true</enableSolr>
+                    <enableSolr>false</enableSolr>
                     <!-- We need Share webapp, so we got a UI for working with the Repo -->
                     <enableShare>true</enableShare>
                     <!-- Enable the REST API Explorer -->
-                    <enableApiExplorer>true</enableApiExplorer>
+                    <enableApiExplorer>false</enableApiExplorer>
 
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR
                         (i.e. alfresco.war)
                     -->
                     <platformModules>
+                        <!-- Share Services will be ignored if you are on Platform earlier than 5.1 -->
                         <moduleDependency>
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>alfresco-share-services</artifactId>
@@ -292,46 +351,34 @@
                             <version>${project.version}</version>
                             <type>amp</type>
                         </moduleDependency>
+                        <!--
                         <moduleDependency>
                             <groupId>${alfresco.groupId}.surf</groupId>
                             <artifactId>spring-webscripts</artifactId>
                             <version>${webscripts.version}</version>
                         </moduleDependency>
+                        -->
+                        <!-- Bring in the integration tests -->
+                        <!--
                         <moduleDependency>
-                            <groupId>${alfresco.groupId}.surf</groupId>
-                            <artifactId>spring-webscripts-api</artifactId>
-                            <version>${webscripts.version}</version>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>integration-tests</artifactId>
+                            <version>${project.version}</version>
+                            <classifier>tests</classifier>
                         </moduleDependency>
+                        -->
                     </platformModules>
 
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
                     -->
                     <shareModules>
-                        <moduleDependency>
-                            <!-- Bring in a newer version of Aikau, can coexist with older versions in the
-                                WAR distribution, newest version is picked. -->
-                            <groupId>${alfresco.groupId}</groupId>
-                            <artifactId>aikau</artifactId>
-                            <version>${aikau.version}</version>
-                        </moduleDependency>
-
                         <!-- Bring in custom Modules -->
                         <moduleDependency>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>alfresco-cas-share-amp</artifactId>
                             <version>${project.version}</version>
                             <type>amp</type>
-                        </moduleDependency>
-                        <moduleDependency>
-                            <groupId>${alfresco.groupId}.surf</groupId>
-                            <artifactId>spring-webscripts</artifactId>
-                            <version>${webscripts.version}</version>
-                        </moduleDependency>
-                        <moduleDependency>
-                            <groupId>${alfresco.groupId}.surf</groupId>
-                            <artifactId>spring-webscripts-api</artifactId>
-                            <version>${webscripts.version}</version>
                         </moduleDependency>
                     </shareModules>
                 </configuration>
@@ -358,10 +405,8 @@
                         <fallback>all</fallback>
                         <resources>
                             <resource>
-                                <!--
-                                Empty resource element marks default configuration. By
-                                default it is placed first in generated configuration.
-                                -->
+                                <directory>${project.build.outputDirectory}</directory>
+                                <directory>${project.build.testOutputDirectory}</directory>
                             </resource>
                         </resources>
                     </classpath>

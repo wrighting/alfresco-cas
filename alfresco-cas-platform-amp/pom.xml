@@ -13,21 +13,11 @@
 
 
     <dependencies>
-        <!-- The main Alfresco Repo dependency for compiling Java code in src/main/java -->
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>${alfresco.groupId}</groupId>
-        	<artifactId>alfresco-remote-api</artifactId>
-        	<version>${alfresco.platform.version}</version>
-        </dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
-		</dependency>
+        </dependency>
     </dependencies>
 
 
