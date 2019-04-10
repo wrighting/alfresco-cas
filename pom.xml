@@ -58,11 +58,12 @@
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.1.g</alfresco.platform.version>
-        <alfresco.share.version>5.1.g</alfresco.share.version>
+        <alfresco.platform.version>5.2.e</alfresco.platform.version>
+        <alfresco.share.version>5.2.d</alfresco.share.version>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
         <alfresco.surf.version>6.11</alfresco.surf.version>
+        <webscripts.version>6.13</webscripts.version>
 
         <!-- Aikau framework version, it is released separately, so it can be useful to be able
              to bring in newer versions with bug fixes etc -->
@@ -291,6 +292,16 @@
                             <version>${project.version}</version>
                             <type>amp</type>
                         </moduleDependency>
+                        <moduleDependency>
+                            <groupId>${alfresco.groupId}.surf</groupId>
+                            <artifactId>spring-webscripts</artifactId>
+                            <version>${webscripts.version}</version>
+                        </moduleDependency>
+                        <moduleDependency>
+                            <groupId>${alfresco.groupId}.surf</groupId>
+                            <artifactId>spring-webscripts-api</artifactId>
+                            <version>${webscripts.version}</version>
+                        </moduleDependency>
                     </platformModules>
 
                     <!--
@@ -311,6 +322,16 @@
                             <artifactId>alfresco-cas-share-amp</artifactId>
                             <version>${project.version}</version>
                             <type>amp</type>
+                        </moduleDependency>
+                        <moduleDependency>
+                            <groupId>${alfresco.groupId}.surf</groupId>
+                            <artifactId>spring-webscripts</artifactId>
+                            <version>${webscripts.version}</version>
+                        </moduleDependency>
+                        <moduleDependency>
+                            <groupId>${alfresco.groupId}.surf</groupId>
+                            <artifactId>spring-webscripts-api</artifactId>
+                            <version>${webscripts.version}</version>
                         </moduleDependency>
                     </shareModules>
                 </configuration>
