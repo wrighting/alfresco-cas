@@ -17,4 +17,7 @@
 	limitations under the License.
 -->
 <beans>
+    <bean id="webscript.org.wrighting.alfresco.cas.getticket.get" parent="webscript" class="org.wrighting.alfresco.cas.webscript.GetTicket">
+        <property name="authenticationService" ref="authenticationService"></property>
+    </bean>
 </beans>
