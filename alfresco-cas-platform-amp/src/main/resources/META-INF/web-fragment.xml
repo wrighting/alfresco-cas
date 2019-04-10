@@ -82,6 +82,11 @@ http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
 		<filter-class>org.wrighting.alfresco.repo.web.filter.beans.IgnoreFlagFilter</filter-class>
 	</filter>
 	
+	<filter-mapping>
+		<filter-name>Ignore Filter</filter-name>
+        <url-pattern>/api/-default-/public/authentication/versions/1/tickets</url-pattern>
+	</filter-mapping>
+
 	<!--  Ignore patterns that would be auth by the X509AuthFilter -->
 	<filter-mapping>
 		<filter-name>Ignore Filter</filter-name>
