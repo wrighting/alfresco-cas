@@ -32,7 +32,7 @@
         <module.log.level>warn</module.log.level>
 
         <!-- Alfresco Maven Plugin version to use -->
-        <alfresco.sdk.version>3.0.0-beta-5</alfresco.sdk.version>
+        <alfresco.sdk.version>3.1.0</alfresco.sdk.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -58,8 +58,8 @@
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.e</alfresco.platform.version>
-        <alfresco.share.version>5.2.d</alfresco.share.version>
+        <alfresco.platform.version>5.2.g</alfresco.platform.version>
+        <alfresco.share.version>5.2.f</alfresco.share.version>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
         <alfresco.surf.version>6.11</alfresco.surf.version>
@@ -77,8 +77,8 @@
         <env>local</env>
 
         <!-- Compile with Java 7, default is 5 -->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -376,49 +376,37 @@
             </plugin>
 
             <!-- 
-mvn jgitflow:release-start
-mvn jgitflow:release-finish
--->
+            mvn gitflow:release-start
+            mvn gitflow:release-finish
+             -->
             <plugin>
-              <groupId>com.atlassian.maven.plugins</groupId>
-              <artifactId>maven-jgitflow-plugin</artifactId>
-              <version>1.0-alpha20</version>
-              <configuration>
-                <!-- Enable this to push to origin using SSH keys -->
-                <enableSshAgent>true</enableSshAgent>
-                <!-- Keep your maven submodules at the same version as the parent POM -->
-                <autoVersionSubmodules>true</autoVersionSubmodules>
-                <!--
-                  Pusing in-development features to origin allows all devs to see what each other
-                  are working on
-                -->
-                <pushFeatures>true</pushFeatures>
-                <!--
-                  This allows the CI server (e.g. Jenkins) to automatically push new releases to
-                  origin; you can then either manually deploy them or, if you are doing Continuous
-                  Deployments, auto-deploy them to prod
-                -->
-                <pushReleases>true</pushReleases>
-                <!--
-                  Hot Fixes should be pushed to origin as well so that any dev can pick them up
-                -->
-                <pushHotfixes>true</pushHotfixes>
-                <!--
-                  Prevents deployments from dev workstations so that they can be done by a CI
-                  server
-                -->
-                <noDeploy>true</noDeploy>
-                <flowInitContext>
-                  <!--
-                    You can customize your development branch name. Why? Because it's faster to type
-                    'git push origin dvlp'
-                    than
-                    'git push origin develop'
-                    ;-)
-                  -->
-                  <developBranchName>dvlp</developBranchName>
-                </flowInitContext>
-              </configuration>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>1.9.0</version>
+                <configuration>
+                    <!-- Enable this to push to origin using SSH keys -->
+                    <enableSshAgent>true</enableSshAgent>
+                    <!-- Keep your maven submodules at the same version as the parent POM -->
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <!-- Pusing in-development features to origin allows all devs to see 
+                        what each other are working on -->
+                    <pushFeatures>true</pushFeatures>
+                    <!-- This allows the CI server (e.g. Jenkins) to automatically push 
+                        new releases to origin; you can then either manually deploy them or, if you 
+                        are doing Continuous Deployments, auto-deploy them to prod -->
+                    <pushReleases>true</pushReleases>
+                    <!-- Hot Fixes should be pushed to origin as well so that any dev can 
+                        pick them up -->
+                    <pushHotfixes>true</pushHotfixes>
+                    <!-- Prevents deployments from dev workstations so that they can be 
+                        done by a CI server -->
+                    <noDeploy>true</noDeploy>
+                    <gitFlowConfig>
+                        <!-- You can customize your development branch name. Why? Because it's 
+                            faster to type 'git push origin dvlp' than 'git push origin develop' ;-) -->
+                        <developmentBranch>dvlp</developmentBranch>
+                    </gitFlowConfig>
+                </configuration>
             </plugin>
         </plugins>
     </build>
